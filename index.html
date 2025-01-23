@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="LLMSR.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <title>XLLM ACL 2025 Shared Task-II: Speech Event Extraction</title> -->
+    <title> XLLM ACL 2025 Shared Task: Large Language Model Structure Reasoning </title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <!--  <script src="./static/js/index.js"></script>-->
+    <style>
+        pre {outline: 1px solid #ccc; }
+         .string { color: green; }
+         .number { color: darkorange; }
+         .boolean { color: blue; }
+         .null { color: magenta; }
+         .key { color: red; }
+        ._table{width: 100%; border-collapse: collapse; border:0px;}
+        ._table thead tr {font-size: 13px; color: #2e3b45;  text-align: center; background-color: rgba(230, 255, 250, 0.92); font-weight:bold;}
+        ._table td{line-height: 20px; text-align: center; padding: 4px 10px 3px 10px; height: 18px;border: 0px solid #ffffff;}
+        ._table tbody tr {background: #fff; font-size: 13px; color: #393939;}
+        ._table tbody tr:nth-child(2n){ background: #f3f3f3;}
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title"><a href="https://xllms.github.io/">XLLM</a> @ ACL 2025 Shared Task:</h1>
+                        <h1 class="title is-1 publication-title">Large Language Model Structure Reasoning (<a href="#">LLMSR</a>)</h1> <!--Add Link Here-->
+                        
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+
+                                                            
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#introduction"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Introduction</span>
+                                    </a>
+                                </span>
+                                
+                                <!-- Data Link. -->
+                                <span class="link-block">
+                                    <a href="#dataset"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Dataset</span>
+                                    </a>
+                                </span>
+                                <!-- Paper Link. -->
+                                <span class="link-block">
+                                    <a href="#task"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Task & Evaluation</span>
+                                    </a>
+                                </span>
+                                <!-- Code Link. -->
+
+                                
+                                <span class="link-block">
+                                    <!--Add Link Here-->
+                                    <a href="#" 
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="#submission"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Submission</span>
+                                    </a>
+                                </span>
+
+                                
+
+                                <span class="link-block">
+                                    <a href="#timeline"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>Timeline</span>
+                                    </a>
+                                </span>
+
+                                <span class="link-block">
+                                    <!--Add Link Here-->
+                                    <a href="#"
+                                        class="external-link button is-normal is-rounded is-dark">
+                                        <span>CodaBench</span>
+                                    </a>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section"style="margin-top: -50px;">
+        <div class="container is-max-desktop">
+
+            <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Leaderboard</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Congratulations to the winners!
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                                <td>Rank</td>
+                                <td>Team</td>
+                                <td>Score</td>
+                              </tr>
+                            <tr>
+                              <td>1</td>
+                              <td>Token</td>
+                              <td>63.2064</td>
+                            </tr>
+                            <tr>
+                              <td>2</td>
+                              <td>USTC-IAT-United</td>
+                              <td>62.1149</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>ppjj</td>
+                                <td>59.8638</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>GXU-LIPE</td>
+                                <td>59.6864</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>DMCV</td>
+                                <td>59.3998</td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div> -->
+            
+            <!-- Abstract. -->
+            <div id="introduction" class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Introduction</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                        The Introduction will be comming as soon as possible
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+
+            <div id="task" div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
+                    <div class="content has-text-justified">
+  
+                        <p>
+                            The Challenge Task Definition and Metrtics will be comming as soon as possible.
+                        </p>
+                        
+                        <div class="columns is-centered has-text-centered">
+                            <div>
+                                <h2 class="title is-3">Evaluation</h2>
+                                <div class="content has-text-justified">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <p>The Evaluation method will will be comming as soon as possible.</p>
+                        
+                    </div>
+                </div>
+            </div>
+             <!-- Datasets. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="dataset" class="column is-four-fifths">
+                    <h2 class="title is-3">Dataset</h2>
+                    <div class="content has-text-justified">
+
+                        <p>
+                            The Dataset Introduction will be comming as soon as possible.
+                        
+                        </p>
+             
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="columns is-centered has-text-centered">
+                <div id="timeline" class="column is-four-fifths">
+                    <h2 class="title is-3">Timeline</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Please note: The submission deadline is at 11:59 p.m. (<a herf="https://www.timeanddate.com/time/zones/aoe" style="color:red">Anywhere on Earth</a>) of the stated deadline date.
+                        </p>
+                        <table class="._table table-bordered table-striped" align="center">
+                            <tbody align="center" valign="center">
+                            <tr>
+                              <td>Training data and participant instruction release for all shared tasks</td>
+                              <td>February 10, 2025</td>
+                            </tr>
+                            <tr>
+                              <td>Evaluation deadline for all shared tasks</td>
+                              <td>March 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Notification of all shared tasks</td>
+                                <td>April 5, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Shared-task paper submission deadline</td>
+                                <td>April 12, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Acceptance notification of shared-task papers</td>
+                                <td>April 30, 2025</td>
+                            </tr>
+                            <tr>
+                                <td>Camera ready paper deadline</td>
+                                <td>May 16, 2025</td>
+                            </tr>
+                            
+
+
+                            <!-- <tr>
+                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
+                                <td><b style="color: red">August 19, 2024</b></td>
+                            </tr> -->
+
+                        </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="submission" class="column is-four-fifths">
+                    <h2 class="title is-3">Submission</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Please sumbit predicted results with a json files "results.json".
+                        </p>
+                        
+                                              
+                    </div>
+                </div>
+            </div>
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div id="code" class="column is-four-fifths">
+                    <h2 class="title is-3">Baseline</h2>
+                    <div class="content has-text-justified">
+                      
+                        <p>
+                            <!--Add Link Here-->
+                            Baseline code and full data will publish as soon as possible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+        
+             <!-- <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Registration</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                             Welcome and please apply for the VSD challenge via a form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuKXhaN5qa61rWlwaE3VpJD5FHcVLH25Un95wch6fCKiXIGQ/viewform?usp=sf_link">this link</a>.
+                        </p>
+                        <p>
+                            Feel free to contact us at <a href="mailto: vsdchallenge@gmail.com">vsdchallenge@gmail.com</a>.
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+
+            
+            
+            
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Award of Top-ranking Participants</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a>XLLM Workshop of ACL 2025</a>.
+                        </p>
+                    </div>
+                </div>
+            </div>   
+
+            <!-- / Paper video. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Organizers</h2>
+                    <div class="content has-text-justified">
+                        
+            <p>Zixia Jia (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Zilong Zheng (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Shuyi Zhang (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Zhenbin Chen (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">References</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            
+                            [1] Yao, Yuan, et al. "DocRED: A large-scale document-level relation extraction dataset." arXiv preprint arXiv:1906.06127 (2019).
+                        </p>
+
+                        <p>
+                            
+                            [2] Tan, Qingyu, et al. "Revisiting DocRED--Addressing the False Negative Problem in Relation Extraction." arXiv preprint arXiv:2205.12696 (2022).
+                        </p>
+
+                        <p>
+                            [3] Li, Junpeng, Zixia Jia, and Zilong Zheng. "Semi-automatic data enhancement for document-level relation extraction with distant supervision from large language models." arXiv preprint arXiv:2311.07314 (2023).
+                        </p>
+                        <p>
+                            [4] Gui, Honghao, et al. "Iepile: Unearthing large-scale schema-based information extraction corpus." arXiv preprint arXiv:2402.14710 (2024).
+                        </p>
+                        <p>
+                            [5] Xue, Lilong, et al. "Autore: Document-level relation extraction with large language models." arXiv preprint arXiv:2403.14888 (2024).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+<script>
+    // function jsonShowFn(json){
+    //     if (!json.match("^\{(.+:.+,*){1,}\}$")) {
+    //         return json           //判断是否是json数据，不是直接返回
+    //     }
+
+    //     if (typeof json != 'string') {
+    //         json = JSON.stringify(json, undefined, 2);
+    //     }
+    //     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    //     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+    //         var cls = 'number';
+    //         if (/^"/.test(match)) {
+    //             if (/:$/.test(match)) {
+    //                 cls = 'key';
+    //             } else {
+    //                 cls = 'string';
+    //             }
+    //         } else if (/true|false/.test(match)) {
+    //             cls = 'boolean';
+    //         } else if (/null/.test(match)) {
+    //             cls = 'null';
+    //         }
+    //         return '<span class="' + cls + '">' + match + '</span>';
+    //     });
+    // }
+    // $('#jsonShow').html(jsonShowFn('[{"imd_id":1,"triple_list":["s":"book","o":"table"]}]'));
+</script>
+</html>
