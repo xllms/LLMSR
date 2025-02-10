@@ -232,50 +232,50 @@
                         </p>
                         <p>A data sample:</p>
                         <pre id="jsonShow">
-                            {
-                                "question": "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.The school has only 7 students participating in this activity, and each person happens to go to one of these two countries.Considering the specialty of each student, this activity must meet the following conditions? (1) If G goes to the UK, then H To the United States.(2) If L goes to the UK, both M and U go to the US.(3) The country W went to was different from the country Z went to.(4) The country where U goes is different from the country where G goes.(5) If Z goes to the UK, then H also goes to the UK.\nIf G goes to the United States, which of the following must be true?\nA.H go to the UK\nB.L go to America\nC.M go to the UK\nD.W go to America",
-                                "question_parsing": [
-                                    "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.",
-                                    "each person happens to go to one of these two countries",
-                                    "If G goes to the UK, then H To the United States",
-                                    "If L goes to the UK, both M and U go to the US",
-                                    "The country W went to was different from the country Z went to",
-                                    "The country where U goes is different from the country where G goes",
-                                    "If Z goes to the UK, then H also goes to the UK",
-                                    "G goes to the United States"
-                                ],
-                                "answer": "b",
-                                "id": 162,
-                                "cot": "Since G goes to the United States, we need to analyze the conditions that follow. Condition (1) is not applicable since G is going to the US. Condition (2) is also not applicable since L's destination is not specified. Condition (3) does not provide any information about H, M, U, or W. Condition (4) states that U's destination is different from G's, which is the US, so U must go to the UK. Condition (5) is not applicable since Z's destination is not specified.",
-                                "cot_parsing": [
-                                    {
-                                        "statement": "Condition (1) is not applicable",
-                                        "evidence": "Condition (1): If G goes to the UK, then H To the United States. | G is going to the US",
-                                        "Verification": "false"
-                                    },
-                                    {
-                                        "statement": "Condition (2) is also not applicable",
-                                        "evidence": "Condition (2): If L goes to the UK, both M and U go to the US. | L's destination is not specified",
-                                        "Verification": "false"
-                                    },
-                                    {
-                                        "statement": "Condition (3) does not provide any information about H, M, U, or W",
-                                        "evidence": "Condition (3): The country W went to was different from the country Z went to.",
-                                        "Verification": "false"
-                                    },
-                                    {
-                                        "statement": "U must go to the UK",
-                                        "evidence": "Condition (4): The country where U goes is different from the country where G goes. | Condition (4) states that U's destination is different from G's, which is the US",
-                                        "Verification": "true"
-                                    },
-                                    {
-                                        "statement": "Condition (5) is not applicable",
-                                        "evidence": "Condition (5): If Z goes to the UK, then H also goes to the UK. | Z's destination is not specified",
-                                        "Verification": "true"
-                                    }
-                                ],
-                                "sel_idx": 92
-                            },                        
+{
+    "question": "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.The school has only 7 students participating in this activity, and each person happens to go to one of these two countries.Considering the specialty of each student, this activity must meet the following conditions? (1) If G goes to the UK, then H To the United States.(2) If L goes to the UK, both M and U go to the US.(3) The country W went to was different from the country Z went to.(4) The country where U goes is different from the country where G goes.(5) If Z goes to the UK, then H also goes to the UK.\nIf G goes to the United States, which of the following must be true?\nA.H go to the UK\nB.L go to America\nC.M go to the UK\nD.W go to America",
+    "question_parsing": [
+        "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.",
+        "each person happens to go to one of these two countries",
+        "If G goes to the UK, then H To the United States",
+        "If L goes to the UK, both M and U go to the US",
+        "The country W went to was different from the country Z went to",
+        "The country where U goes is different from the country where G goes",
+        "If Z goes to the UK, then H also goes to the UK",
+        "G goes to the United States"
+    ],
+    "answer": "b",
+    "id": 162,
+    "cot": "Since G goes to the United States, we need to analyze the conditions that follow. Condition (1) is not applicable since G is going to the US. Condition (2) is also not applicable since L's destination is not specified. Condition (3) does not provide any information about H, M, U, or W. Condition (4) states that U's destination is different from G's, which is the US, so U must go to the UK. Condition (5) is not applicable since Z's destination is not specified.",
+    "cot_parsing": [
+        {
+            "statement": "Condition (1) is not applicable",
+            "evidence": "Condition (1): If G goes to the UK, then H To the United States. | G is going to the US",
+            "Verification": "false"
+        },
+        {
+            "statement": "Condition (2) is also not applicable",
+            "evidence": "Condition (2): If L goes to the UK, both M and U go to the US. | L's destination is not specified",
+            "Verification": "false"
+        },
+        {
+            "statement": "Condition (3) does not provide any information about H, M, U, or W",
+            "evidence": "Condition (3): The country W went to was different from the country Z went to.",
+            "Verification": "false"
+        },
+        {
+            "statement": "U must go to the UK",
+            "evidence": "Condition (4): The country where U goes is different from the country where G goes. | Condition (4) states that U's destination is different from G's, which is the US",
+            "Verification": "true"
+        },
+        {
+            "statement": "Condition (5) is not applicable",
+            "evidence": "Condition (5): If Z goes to the UK, then H also goes to the UK. | Z's destination is not specified",
+            "Verification": "true"
+        }
+    ],
+    "sel_idx": 92
+},                        
                         </pre>
                         <p>If the "statement" can be logically deduced from the "evidence," then the "verification" is considered true; otherwise, the "verification" is false.</p>
                     </div>
