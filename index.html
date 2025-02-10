@@ -189,58 +189,26 @@
                     <h2 class="title is-3">Introduction</h2>
                     <div class="content has-text-justified">
                         <p>
-                            LLM-SR aims to generate a controllable and interpretable reasoning process by utilizing structural reasoning. This task can be viewed as a constrained Chain-of-Thought (CoT) reasoning process, where the reasoning unfolds step by step, referencing relevant facts and rules. This approach enhances the transparency and reliability of the reasoning process. Each inference step consists of a “statement,” “evidence,” and “verification,” with the “verification” step determining whether the statement can be logically deduced from the evidence provided.
+                            LLM-SR aims to generate a controllable and interpretable reasoning process by employing step-by-step inferences. In this task, we focus on a fine-grained analysis of the Chain-of-Thought (CoT) process, which enables a more detailed evaluation of LLMs and contributes to Process Reward Modeling, thereby enhancing the generation of more coherent and accurate reasoning processes.
                         </p>
                         <p>
-                            The first task requires the generation of the “cot_parsing” result based on the content of the "cot." This involves analyzing the multi-step reasoning process. The second task assesses the correctness of the reasoning for each step, evaluating whether the reasoning aligns with the content of the "question," "statement," and "evidence" presented at each stage of the process.
+                            To achieve this, the task requires generating "question_parsing" and "cot_parsing" results based on the content of "question" and "cot" (produced by Llama-3-8B-Instruct) for each given question. The question parsing process involves extracting all conditions necessary for solving the question. The CoT parsing process identifies all "statements" and their corresponding "evidence" within the context of the question conditions and the given CoT content. Subsequently, for each extracted statement-evidence pair, a conclusion is required to determine whether the evidence sufficiently supports the statement.
+                        </p>
+                        <p>
+                            Focusing on the LLM’s capacity for fine-grained question analysis and deduction based on given conditions, we provide only 24 training examples to illustrate the data format and question types. Furthermore, participants can only use the Llama-3-8B-Instruct as their backbone model.
                         </p>
                     </div>
                 </div>
             </div>
             <!--/ Abstract. -->
-
-            <div id="task" div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
-                    <div class="content has-text-justified">
-  
-                        <p>
-                            The Challenge Task Definition and Metrtics will be comming as soon as possible.
-                        </p>
-                        
-                        <div class="columns is-centered has-text-centered">
-                            <div>
-                                <h2 class="title is-3">Evaluation</h2>
-                                <div class="content has-text-justified">
-                                    <h3> Accuracy</h3>
-                                    Accuracy is an evaluation indicator that directly reflects whether LLM can accurately answer specific questions through CoT:
-                                         <p>$$ Accuracy = \frac{TP+FN}{ TP + FN+ TN + FP} $$ </p>
-                                    <h3> F1 score</h3>
-                                    Although the accuracy rate can determine the overall correctness, it cannot be used as a good indicator to measure the results when the samples are unbalanced. Therefore, in addition to the accuracy rate, we need to use the F1 score to comprehensively evaluate the reasoning ability of the model.
-                                    The F1 score is calculated by Precision \(P\)  and Recall \(R\):
-                                         <p>$$ P = \frac{TP}{ TP + FP } $$ </p>
-                                         <p>$$ R = \frac{TP}{TP + FN} $$ </p>
-                                         <p>$$ F1 = \frac{2 \times P \times R }{ P + R } $$ </p>
-                                         <ul>
-                                             <li>\(TP\): True Positive ratio, which indicates the number of samples that were correctly predicted by the model.</li>
-                                             <li>\(FP\): False Positive ratio, which indicates the number of samples that were incorrectly predicted by the model.</li>
-                                             <li>\(FN\): False Negative ratio, which the number of samples that the model's prediction are inconsistent with Ground True .</li>
-                                         </ul>
-
-                                     </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <!-- Datasets. -->
-            <div class="columns is-centered has-text-centered">
+               <!-- Datasets. -->
+               <div class="columns is-centered has-text-centered">
                 <div id="dataset" class="column is-four-fifths">
                     <h2 class="title is-3">Dataset</h2>
                     <div class="content has-text-justified">
 
                         <p>
-                            For the LLM-SR task, we present a fine-grained Chain-of-Thought (CoT) analysis dataset derived from Llama3, consisting of 24 annotated examples that serve as the training set. These examples are accompanied by reasoning steps, which are integral to the task.
+                            We introduce a fine-grained Chain-of-Thought (CoT) analysis dataset derived from LogiQA, comprising 24 annotated examples that constitute the training set. Each example is supplemented with question parsing and CoT parsing annotations.
                         </p>
                         <p>A data sample:</p>
                         <pre id="jsonShow">
@@ -295,6 +263,129 @@
                 </div>
             </div>
 
+            <div id="task" div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
+                    <div class="content has-text-justified">
+  
+                        <p>
+                            The Challenge Task Definition and Metrtics will be comming as soon as possible.
+                        </p>
+                        
+                        <div class="columns is-centered has-text-centered">
+                            <div>
+                                <h2 class="title is-3">Evaluation</h2>
+                                <div class="content has-text-justified">
+                                    <h3> Accuracy</h3>
+                                    Accuracy is an evaluation indicator that directly reflects whether LLM can accurately answer specific questions through CoT:
+                                         <p>$$ Accuracy = \frac{TP+FN}{ TP + FN+ TN + FP} $$ </p>
+                                    <h3> F1 score</h3>
+                                    Although the accuracy rate can determine the overall correctness, it cannot be used as a good indicator to measure the results when the samples are unbalanced. Therefore, in addition to the accuracy rate, we need to use the F1 score to comprehensively evaluate the reasoning ability of the model.
+                                    The F1 score is calculated by Precision \(P\)  and Recall \(R\):
+                                         <p>$$ P = \frac{TP}{ TP + FP } $$ </p>
+                                         <p>$$ R = \frac{TP}{TP + FN} $$ </p>
+                                         <p>$$ F1 = \frac{2 \times P \times R }{ P + R } $$ </p>
+                                         <ul>
+                                             <li>\(TP\): True Positive ratio, which indicates the number of samples that were correctly predicted by the model.</li>
+                                             <li>\(FP\): False Positive ratio, which indicates the number of samples that were incorrectly predicted by the model.</li>
+                                             <li>\(FN\): False Negative ratio, which the number of samples that the model's prediction are inconsistent with Ground True .</li>
+                                         </ul>
+
+                                     </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             
+
+
+            <div class="columns is-centered has-text-centered">
+                <div id="code" class="column is-four-fifths">
+                    <h2 class="title is-3">Baseline & Code</h2>
+                    <div class="content has-text-justified">
+                      
+                        <p>
+                            <!--Add Link Here-->
+                            Baseline code and full data will publish as soon as possible.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="columns is-centered has-text-centered">
+                <div id="submission" class="column is-four-fifths">
+                    <h2 class="title is-3">Submission</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Our challenge seeks to investigate the structure reasoning capabilities of large language models (LLMs), particularly in low-resource settings. To this end, we introduce a fine-grained Chain-of-Thought (CoT) analysis dataset derived from LogiQA, comprising 24 annotated examples that constitute the training set. Each example is supplemented with question parsing and CoT parsing annotations.
+                        </p>
+                        <p>
+                            Participants may utilize the provided training set to develop their own structure reasoning models and make predictions on the test set. It is important to note that <b>the use of additional data for training is permitted.</b> Participants are required to apply their trained models to generate predictions on the test set and present the results in the specified format.
+                        </p>
+                        <p>
+                            Participants need to successfully submit all the following files to be considered valid submissions:
+                            <ol>
+                                <li><b>Prediction result file (result.json)</b>: This file should contain the prediction results of the model on the test set, formatted according to the specified requirements.</li>
+                                <li><b>Model weight file (*.ckpt, *.bin)</b>: Participants are required to provide the trained model weight file. The file should be uploaded to cloud storage, and the corresponding link must be recorded in the link.txt file.</li>
+                                <li><b>Executable script file (*.py)</b>: An executable script file must be provided, which will be used in conjunction with the submitted model weights to verify the correctness of the provided results. The file should be uploaded to cloud storage, and the corresponding link must be recorded in the link.txt file.</li>
+                            </ol>
+                            The prediction result file(result.json) and the link file (link.txt) must be submitted via <a href="#">CodaBench</a>, which will be used to evaluate the submitted prediction results in real time. 
+                        </p>
+                        <p>
+                             Please sumbit predicted results with a json files "results.json".
+                        </p>
+                        <pre id="jsonShow">
+{
+    "question": "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.The school has only 7 students participating in this activity, and each person happens to go to one of these two countries.Considering the specialty of each student, this activity must meet the following conditions? (1) If G goes to the UK, then H To the United States.(2) If L goes to the UK, both M and U go to the US.(3) The country W went to was different from the country Z went to.(4) The country where U goes is different from the country where G goes.(5) If Z goes to the UK, then H also goes to the UK.\nIf G goes to the United States, which of the following must be true?\nA.H go to the UK\nB.L go to America\nC.M go to the UK\nD.W go to America",
+    "question_parsing": [
+            "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.",
+            "each person happens to go to one of these two countries",
+            "If G goes to the UK, then H To the United States",
+            "If L goes to the UK, both M and U go to the US",
+            "The country W went to was different from the country Z went to",
+            "The country where U goes is different from the country where G goes",
+            "If Z goes to the UK, then H also goes to the UK",
+            "G goes to the United States"
+        ],
+    "answer": "b",
+    "id": 162,
+    "cot": "Since G goes to the United States, we need to analyze the conditions that follow. Condition (1) is not applicable since G is going to the US. Condition (2) is also not applicable since L's destination is not specified. Condition (3) does not provide any information about H, M, U, or W. Condition (4) states that U's destination is different from G's, which is the US, so U must go to the UK. Condition (5) is not applicable since Z's destination is not specified.",
+    "cot_parsing": [
+        {
+            "statement": "Condition (1) is not applicable",
+            "evidence": "Condition (1): If G goes to the UK, then H To the United States. | G is going to the US",
+            "Verification": "false"
+        },
+        {
+            "statement": "Condition (2) is also not applicable",
+            "evidence": "Condition (2): If L goes to the UK, both M and U go to the US. | L's destination is not specified",
+            "Verification": "false"
+        },
+        {
+            "statement": "Condition (3) does not provide any information about H, M, U, or W",
+            "evidence": "Condition (3): The country W went to was different from the country Z went to.",
+            "Verification": "false"
+        },
+        {
+            "statement": "U must go to the UK",
+            "evidence": "Condition (4): The country where U goes is different from the country where G goes. | Condition (4) states that U's destination is different from G's, which is the US",
+            "Verification": "true"
+        },
+        {
+            "statement": "Condition (5) is not applicable",
+            "evidence": "Condition (5): If Z goes to the UK, then H also goes to the UK. | Z's destination is not specified",
+            "Verification": "true"
+        }
+    ],
+    "sel_idx": 92
+},                        
+</pre>
+                                              
+                    </div>
+                </div>
+            </div>
 
 
             <div class="columns is-centered has-text-centered">
@@ -330,70 +421,12 @@
                                 <td>Camera ready paper deadline</td>
                                 <td>May 16, 2025</td>
                             </tr>
-                            
-
-
-                            <!-- <tr>
-                                <td><b style="color: red">Challenge Paper Submission Deadline</b>(follow <a href="https://2024.acmmm.org/important-dates">MM2024 Workshop Dates</a>)</td>
-                                <td><b style="color: red">August 19, 2024</b></td>
-                            </tr> -->
 
                         </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-            
-            <!-- / Paper video. -->
-            <div class="columns is-centered has-text-centered">
-                <div id="submission" class="column is-four-fifths">
-                    <h2 class="title is-3">Submission</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                             Please sumbit predicted results with a json files "results.json".
-                        </p>
-                        
-                                              
-                    </div>
-                </div>
-            </div>
-
-            <!-- / Paper video. -->
-            <div class="columns is-centered has-text-centered">
-                <div id="code" class="column is-four-fifths">
-                    <h2 class="title is-3">Baseline</h2>
-                    <div class="content has-text-justified">
-                      
-                        <p>
-                            <!--Add Link Here-->
-                            Baseline code and full data will publish as soon as possible.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            
-        
-             <!-- <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h2 class="title is-3">Registration</h2>
-                    <div class="content has-text-justified">
-                        <p>
-                             Welcome and please apply for the VSD challenge via a form at <a href="https://docs.google.com/forms/d/e/1FAIpQLSfuKXhaN5qa61rWlwaE3VpJD5FHcVLH25Un95wch6fCKiXIGQ/viewform?usp=sf_link">this link</a>.
-                        </p>
-                        <p>
-                            Feel free to contact us at <a href="mailto: vsdchallenge@gmail.com">vsdchallenge@gmail.com</a>.
-                        </p>
-                    </div>
-                </div>
-            </div> -->
-
-            
             
             
             <div class="columns is-centered has-text-centered">
@@ -401,7 +434,7 @@
                     <h2 class="title is-3">Award of Top-ranking Participants</h2>
                     <div class="content has-text-justified">
                         <p>
-                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a>XLLM Workshop of ACL 2025</a>.
+                            Top-ranked participants in this competition will receive a certificate of achievement and will be recommended to write a technical paper for submission to the <a href="https://xllms.github.io/">XLLM Workshop of ACL 2025</a>.
                         </p>
                     </div>
                 </div>
