@@ -189,10 +189,10 @@
                     <h2 class="title is-3">Introduction</h2>
                     <div class="content has-text-justified">
                         <p>
-                            We introduce the Universal Document-level Information Extraction (DocIE) challenge on XLLM platform. The goal of LLM-SR is to generate a controllable and interpretable reasoning process by leveraging structural reasoning. This challenge requires the structural parsing of two distinct components: major premises and minor premises, then involving identifying fine-grained “alignments” between these two structures and ultimately deriving a conclusion. This task can be regarded as a constrained Chain-of-Thought (CoT) reasoning process, where reasoning is conducted step by step with reference to facts and relevant rules, thereby improving the transparency and reliability of the process.
+                            LLM-SR aims to generate a controllable and interpretable reasoning process by utilizing structural reasoning. This task can be viewed as a constrained Chain-of-Thought (CoT) reasoning process, where the reasoning unfolds step by step, referencing relevant facts and rules. This approach enhances the transparency and reliability of the reasoning process. Each inference step consists of a “statement,” “evidence,” and “verification,” with the “verification” step determining whether the statement can be logically deduced from the evidence provided.
                         </p>
                         <p>
-                            LLMSR Challenge and Dataset is coming soon.
+                            The first task requires the generation of the “cot_parsing” result based on the content of the "cot." This involves analyzing the multi-step reasoning process. The second task assesses the correctness of the reasoning for each step, evaluating whether the reasoning aligns with the content of the "question," "statement," and "evidence" presented at each stage of the process.
                         </p>
                     </div>
                 </div>
@@ -228,10 +228,56 @@
                     <div class="content has-text-justified">
 
                         <p>
-                            The Dataset Introduction will be comming as soon as possible.
-                        
+                            For the LLM-SR task, we utilize the Chinese Dialogue-level Dependency Treebank (CDDT), which consists of 24 annotated examples, to serve as the training set. These examples are accompanied by reasoning steps, which are essential for the task.
                         </p>
-             
+                        <p>A data sample:</p>
+                        <pre id="jsonShow">
+                            {
+                                "question": "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.The school has only 7 students participating in this activity, and each person happens to go to one of these two countries.Considering the specialty of each student, this activity must meet the following conditions? (1) If G goes to the UK, then H To the United States.(2) If L goes to the UK, both M and U go to the US.(3) The country W went to was different from the country Z went to.(4) The country where U goes is different from the country where G goes.(5) If Z goes to the UK, then H also goes to the UK.\nIf G goes to the United States, which of the following must be true?\nA.H go to the UK\nB.L go to America\nC.M go to the UK\nD.W go to America",
+                                "question_parsing": [
+                                    "There are 7 outstanding students G, H, L, M, U, W and Z in a school.During the summer vacation, the school will send them to the United Kingdom and the United States for inspection.",
+                                    "each person happens to go to one of these two countries",
+                                    "If G goes to the UK, then H To the United States",
+                                    "If L goes to the UK, both M and U go to the US",
+                                    "The country W went to was different from the country Z went to",
+                                    "The country where U goes is different from the country where G goes",
+                                    "If Z goes to the UK, then H also goes to the UK",
+                                    "G goes to the United States"
+                                ],
+                                "answer": "b",
+                                "id": 162,
+                                "cot": "Since G goes to the United States, we need to analyze the conditions that follow. Condition (1) is not applicable since G is going to the US. Condition (2) is also not applicable since L's destination is not specified. Condition (3) does not provide any information about H, M, U, or W. Condition (4) states that U's destination is different from G's, which is the US, so U must go to the UK. Condition (5) is not applicable since Z's destination is not specified.",
+                                "cot_parsing": [
+                                    {
+                                        "statement": "Condition (1) is not applicable",
+                                        "evidence": "Condition (1): If G goes to the UK, then H To the United States. | G is going to the US",
+                                        "Verification": "false"
+                                    },
+                                    {
+                                        "statement": "Condition (2) is also not applicable",
+                                        "evidence": "Condition (2): If L goes to the UK, both M and U go to the US. | L's destination is not specified",
+                                        "Verification": "false"
+                                    },
+                                    {
+                                        "statement": "Condition (3) does not provide any information about H, M, U, or W",
+                                        "evidence": "Condition (3): The country W went to was different from the country Z went to.",
+                                        "Verification": "false"
+                                    },
+                                    {
+                                        "statement": "U must go to the UK",
+                                        "evidence": "Condition (4): The country where U goes is different from the country where G goes. | Condition (4) states that U's destination is different from G's, which is the US",
+                                        "Verification": "true"
+                                    },
+                                    {
+                                        "statement": "Condition (5) is not applicable",
+                                        "evidence": "Condition (5): If Z goes to the UK, then H also goes to the UK. | Z's destination is not specified",
+                                        "Verification": "true"
+                                    }
+                                ],
+                                "sel_idx": 92
+                            },                        
+                        </pre>
+                        <p>If the "statement" can be logically deduced from the "evidence," then the "verification" is considered true; otherwise, the "verification" is false.</p>
                     </div>
                 </div>
             </div>
