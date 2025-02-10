@@ -212,12 +212,24 @@
                             <div>
                                 <h2 class="title is-3">Evaluation</h2>
                                 <div class="content has-text-justified">
-                                    
-                                </div>
+                                    <h3> Accuracy</h3>
+                                    Accuracy is an evaluation indicator that directly reflects whether LLM can accurately answer specific questions through CoT:
+                                         <p>$$ Accuracy = \frac{TP+FN}{ TP + FN+ TN + FP} $$ </p>
+                                    <h3> F1 score</h3>
+                                    Although the accuracy rate can determine the overall correctness, it cannot be used as a good indicator to measure the results when the samples are unbalanced. Therefore, in addition to the accuracy rate, we need to use the F1 score to comprehensively evaluate the reasoning ability of the model.
+                                    The F1 score is calculated by Precision \(P\)  and Recall \(R\):
+                                         <p>$$ P = \frac{TP}{ TP + FP } $$ </p>
+                                         <p>$$ R = \frac{TP}{TP + FN} $$ </p>
+                                         <p>$$ F1 = \frac{2 \times P \times R }{ P + R } $$ </p>
+                                         <ul>
+                                             <li>\(TP\): True Positive ratio, which indicates the number of samples that were correctly predicted by the model.</li>
+                                             <li>\(FP\): False Positive ratio, which indicates the number of samples that were incorrectly predicted by the model.</li>
+                                             <li>\(FN\): False Negative ratio, which the number of samples that the model's prediction are inconsistent with Ground True .</li>
+                                         </ul>
+
+                                     </div>
                             </div>
                         </div>
-                        <p>The Evaluation method will will be comming as soon as possible.</p>
-                        
                     </div>
                 </div>
             </div>
