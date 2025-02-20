@@ -293,6 +293,9 @@
                                     <p>
                                         The final test set evaluation will be available on March 20th in CodeBench. Participants can currently self-evaluate the provided training or development sets using the evaluation script we’ve provided. Final results will be calculated using the same evaluation methods.
                                     </p>
+                                    <p>
+                                        <b>We’ve refined our training datasets. Please download the latest version from <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a> (Final_Selection_Train_v2.json)</b>
+                                    </p>
 
                                      </div>
                             </div>
@@ -309,7 +312,6 @@
                     <div class="content has-text-justified">
                       
                         <p>
-                            <!--Add Link Here-->
                             Baseline code and full data will publish as soon as possible.
                         </p>
                     </div>
@@ -385,6 +387,44 @@
     "sel_idx": 92
 },                        
 </pre>
+<p>
+    <b>The evaluation code is available on <a>Github</a>.</b>Participants can use the evaluation script using the following command:
+</p>
+<pre>
+    <code>
+python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/reference.json' --question_threshold 0.95 --statement_threshold 0.9 --relation_threshold 0.9
+    </code>
+</pre>
+<p>
+    In addition, we also provide DeepSeek's prediction results, which participants can obtain on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a>. The performance of DeepSeek on our dataset is as follows:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Question_Macro_F1</td>
+            <td>0.8187</td>
+        </tr>
+        <tr>
+            <td>Statement_Macro_F1</td>
+            <td>0.4484</td>
+        </tr>
+        <tr>
+            <td>Statement_Evidence_Macro_F1</td>
+            <td>0.1242</td>
+        </tr>
+        <tr>
+            <td>Reasoning_F1</td>
+            <td>0.1079</td>
+        </tr>
+    </tbody>
+</table>
                                               
                     </div>
                 </div>
