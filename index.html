@@ -258,7 +258,10 @@
 },                        
                         </pre>
                         <p>If the "statement" can be logically deduced from the "evidence," then the "verification" is considered true; otherwise, the "verification" is false.</p>
-                        <p>The datasets are avaliable on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a></p>
+                        <!-- <p>The datasets are avaliable on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a></p> -->
+                        <p>
+                            <b>We’ve refined our training datasets. Please download the latest version from <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a> (Final_Selection_Train_v2.json).</b>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -269,8 +272,19 @@
                     <div class="content has-text-justified">
   
                         <p>
-                            The Challenge Task Definition and Metrtics will be comming as soon as possible.
+                            Question parsing involves extracting all relevant conditions required to solve the problem. The Macro F1 score metric is used to evaluate question parsing performance.
                         </p>
+                        <p>
+                            The process of extracting statements and evidence is similar to Discourse Parsing. Correct extraction of statements or evidence from the COT is crucial at the outset. Next, the pairwise relationship between a specific statement and its corresponding evidence is assessed (a statement should be followed by its related evidence from the COT). Both semantic and lexical similarity are used to evaluate the accuracy of statements and evidence predictions. The final evaluation metric is the Macro F1 score, applied to both statement parsing and statement-evidence pair extraction.
+                        </p>
+                        <p>
+                            Finally, once a statement-evidence pair is correctly extracted, it is evaluated to determine whether the evidence can logically deduce the statement. The Macro F1 score metric is again used for this evaluation.
+                        </p>
+
+
+                        
+
+                        <!--
                         
                         <div class="columns is-centered has-text-centered">
                             <div>
@@ -300,6 +314,7 @@
                                      </div>
                             </div>
                         </div>
+                        -->
                     </div>
                 </div>
             </div>
@@ -310,10 +325,44 @@
                 <div id="code" class="column is-four-fifths">
                     <h2 class="title is-3">Baseline & Code</h2>
                     <div class="content has-text-justified">
-                      
                         <p>
-                            Baseline code and full data will publish as soon as possible.
+                            <b>The evaluation code is available on</b> <a href="https://github.com/xllms/LLMSR/blob/main/eval.py">Github</a>. Participants can use the evaluation script using the following command:
                         </p>
+                        <pre>
+                            <code>
+python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/reference.json' --question_threshold 0.95 --statement_threshold 0.9 --relation_threshold 0.9</code>
+                        </pre>
+
+<p>
+    In addition, we also provide <b>DeepSeek-R1-INT4</b>'s prediction results, which participants can obtain on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a>(test_result_Deepseek-R1-icl.json). The performance of DeepSeek on our dataset is as follows:
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Metric</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Question_Macro_F1</td>
+            <td>0.8187</td>
+        </tr>
+        <tr>
+            <td>Statement_Macro_F1</td>
+            <td>0.4484</td>
+        </tr>
+        <tr>
+            <td>Statement_Evidence_Macro_F1</td>
+            <td>0.1242</td>
+        </tr>
+        <tr>
+            <td>Reasoning_F1</td>
+            <td>0.1079</td>
+        </tr>
+    </tbody>
+</table>
                     </div>
                 </div>
             </div>
@@ -387,44 +436,9 @@
     "sel_idx": 92
 },                        
 </pre>
-<p>
-    <b>The evaluation code is available on <a>Github</a>.</b>Participants can use the evaluation script using the following command:
-</p>
-<pre>
-    <code>
-python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/reference.json' --question_threshold 0.95 --statement_threshold 0.9 --relation_threshold 0.9
-    </code>
-</pre>
-<p>
-    In addition, we also provide DeepSeek's prediction results, which participants can obtain on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a>. The performance of DeepSeek on our dataset is as follows:
-</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>Metric</th>
-            <th>Value</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Question_Macro_F1</td>
-            <td>0.8187</td>
-        </tr>
-        <tr>
-            <td>Statement_Macro_F1</td>
-            <td>0.4484</td>
-        </tr>
-        <tr>
-            <td>Statement_Evidence_Macro_F1</td>
-            <td>0.1242</td>
-        </tr>
-        <tr>
-            <td>Reasoning_F1</td>
-            <td>0.1079</td>
-        </tr>
-    </tbody>
-</table>
+
+
                                               
                     </div>
                 </div>
@@ -491,8 +505,10 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
                         
             <p>Zixia Jia (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
             <p>Zilong Zheng (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
-            <p>Shuyi Zhang (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
-            <p>Zhenbin Chen (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Yang Liu (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Jiaqi Li (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <p>Jun Bai (Beijing Institute for General Artificial Intelligence, Beijing, China)</p>
+            <!-- <p>Zhenbin Chen (Beijing Institute for General Artificial Intelligence, Beijing, China)</p> -->
                     </div>
                 </div>
             </div>
