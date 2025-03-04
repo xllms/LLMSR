@@ -270,7 +270,9 @@
                 <div class="column is-four-fifths">
                     <h2 class="title is-3">Challenge Task Definition and Metrtics</h2>
                     <div class="content has-text-justified">
-  
+                        <p>
+                            This task consists of two parts: <b style="color: red;">Question parsing</b> and <b style="color: red;">CoT parsing</b>.
+                        </p>
                         <p>
                             Question parsing involves extracting all relevant conditions required to solve the problem. The Macro F1 score metric is used to evaluate question parsing performance.
                         </p>
@@ -347,7 +349,7 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
                             Participants may utilize the provided training set to develop their own structure reasoning models and make predictions on the test set. It is important to note that <b style="color: red;">the use of additional data for training is permitted. And leveraging additional models to assist in data annotation or preprocessing is allowed!</b> Participants are required to apply their trained models to generate predictions on the test set and present the results in the specified format.
                         </p>
                         <p>
-                            Participants need to successfully submit all the following files to be considered valid submissions:
+                            Each test data point includes a <b>question, answer, ID, and chain of thought (CoT)</b>. Participants need to predict the <b style="color: red;">question_parsing</b> and <b style="color: red;">cot_parsing</b>. Participants need to successfully submit all the following files to be considered valid submissions:
                             <ol>
                                 <li><b>Prediction result file (result.json)</b>: This file should contain the prediction results of the model on the test set, formatted according to the specified requirements.</li>
                                 <li><b>Model weight file (*.ckpt, *.bin)</b>: Participants are required to provide the trained model weight file. The file should be uploaded to cloud storage, and the corresponding link must be recorded in the link.txt file.</li>
