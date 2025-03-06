@@ -307,11 +307,45 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
                             <b>The final test set evaluation will be available on March 20th in CodeBench. Participants can currently self-evaluate the provided training or development sets using the evaluation script we’ve provided. Final results will be calculated using the same evaluation methods.</b>
                         </p>
 
-<p>
+<!-- <p>
     In addition, we also provide <b>DeepSeek-R1-INT4</b>'s prediction results, which participants can obtain on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a>(test_result_Deepseek-R1-icl.json). The performance of DeepSeek on our dataset is as follows:
+</p> -->
+
+<p>
+    We utilize several large language models that have not been fine-tuned, serving as baselines for comparison. The prediction results of these baseline models are available on <a href="https://drive.google.com/drive/folders/1ZEdMDkOyOw-i-fzNO2KkJcgXroVyc1fG">Google Drive</a> (test_result_XXX-icl.json). Their performance is summarized as follows:
 </p>
 
 <table>
+    <thead>
+      <tr>
+        <th>Models</th>
+        <th>Question_F1</th>
+        <th>Statement_F1</th>
+        <th>Statement_Evidence_F1</th>
+        <th>Reasoning_F1</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> DeepSeek-R1-INT4 </td>
+        <td>0.8187</td>
+        <td>0.4484</td>
+        <td>0.1242</td>
+        <td>0.1079</td>
+      </tr>
+      <tr>
+        <td>Llama-3-8B-Instruct </td>
+        <td>0.7301</td>
+        <td>0.424</td>
+        <td>0.181</td>
+        <td>0.1032</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<!-- <table>
     <thead>
         <tr>
             <th>Metric</th>
@@ -336,7 +370,7 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
             <td>0.1079</td>
         </tr>
     </tbody>
-</table>
+</table> -->
                     </div>
                 </div>
             </div>
