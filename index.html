@@ -308,7 +308,7 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
                         </p> -->
 
                         <p style="color: blue;">
-                            Participants can now access the sample file for the test set (Public_Test_A.json) via Google Drive. This file contains 50 sample test cases to aid in model evaluation and development. Participants are required to submit the prediction results for the 50 test set samples (result.json) to CodaBench, where the platform will automatically evaluate and score the submitted predictions. Additionally, we will use the model checkpoint files (*.ckpt/*.pt/*.safetensor/...) and executable scripts (*.py) provided by the participants to generate predictions for an additional set of 100 test samples.
+                            Participants can now access the sample file for the test set (Public_Test_A.json) via Google Drive. This file contains 50 sample test cases to aid in model evaluation and development. Participants are required to submit the prediction results for the 50 test set samples (results.json) to CodaBench, where the platform will automatically evaluate and score the submitted predictions. Additionally, we will use the model checkpoint files (*.ckpt/*.pt/*.safetensor/...) and executable scripts (*.py) provided by the participants to generate predictions for an additional set of 100 test samples.
                         </p>
                         <p style="color: red;">
                             Now, participants can already submit your prediction results for Public_Test_A.json to CodaBench to obtain evaluation scores.
@@ -395,11 +395,11 @@ python eval.py --prediction '/path/to/prediction.json' --reference '/path/to/ref
                         <p>
                             Each test data point includes a <b>question, answer, ID, and chain of thought (CoT)</b>. Participants need to predict the <b style="color: red;">question_parsing</b> and <b style="color: red;">cot_parsing</b>. Participants need to successfully submit all the following files to be considered valid submissions:
                             <ol>
-                                <li><b>Prediction result file (result.json)</b>: This file should contain the prediction results of the model on the test set, formatted according to the specified requirements.</li>
+                                <li><b>Prediction result file (results.json)</b>: This file should contain the prediction results of the model on the test set, formatted according to the specified requirements.</li>
                                 <li><b>Model weight file (*.ckpt, *.bin)</b>: Participants are required to provide the trained model weight file. The file should be uploaded to cloud storage, and the corresponding link must be recorded in the link.txt file. </li>
                                 <li><b>Executable script file (*.py)</b>: An executable script file must be provided, which will be used in conjunction with the submitted model weights to verify the correctness of the provided results. The file should be uploaded to cloud storage, and the corresponding link must be recorded in the link.txt file.</li>
                             </ol>
-                            The prediction result file(result.json) and the link file (link.txt) must be submitted via <a href="https://www.codabench.org/competitions/5982/">CodaBench</a>, which will be used to evaluate the submitted prediction results in real time.  <font color="#FF0000">We do not restrict the file format of the weight files; participants can use formats such as .safetensor, .pt, or others. However, participants must ensure that the submitted executable script can successfully load the model weights and run correctly.</font>
+                            The prediction result file(results.json) and the link file (link.txt) must be submitted via <a href="https://www.codabench.org/competitions/5982/">CodaBench</a>, which will be used to evaluate the submitted prediction results in real time.  <font color="#FF0000">We do not restrict the file format of the weight files; participants can use formats such as .safetensor, .pt, or others. However, participants must ensure that the submitted executable script can successfully load the model weights and run correctly.</font>
                         </p>
                         <p>
                              Please sumbit predicted results with a json files "results.json". (Please ensure that the submitted file is named "results.json".)
