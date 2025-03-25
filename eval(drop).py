@@ -111,10 +111,6 @@ def eval_statement_parsing(statement_prediction: List[str], statement_references
     statement_idx = 0
     pred_num = len(statement_prediction)
     ref_num = len(statement_references)
-    if pred_num == 0 and ref_num == 0:
-        return 1., []
-    if pred_num == 0 or ref_num == 0:
-        return 0., []
     for pred in statement_prediction:
         token_score = compute_meteor(predictions=[pred] * len(statement_references), references=statement_references)
         semantic_score = compute_semantic_equivalence(predictions=[pred] * len(statement_references), references=statement_references)
@@ -130,10 +126,6 @@ def eval_statement_parsing(statement_prediction: List[str], statement_references
 
 
 def eval_statement_evidence_pair(evidence_predictions: List[str], evidence_references: List[str], correct_statements_idx: List[set], threshold: float):
-    if len(evidence_predictions) == 0 and len(evidence_references) == 0:
-        return 1.0, []
-    if len(evidence_predictions) == 0 or len(evidence_references) == 0:
-        return 0.0, []
     evidence_predictions = [pred.lower() for pred in evidence_predictions]
     evidence_references = [ref.lower() for ref in evidence_references]
     correct_num = 0.0
@@ -152,10 +144,6 @@ def eval_statement_evidence_pair(evidence_predictions: List[str], evidence_refer
     return cal_f1(correct_num, len(evidence_predictions), len(evidence_references)), correct_pair_idx
 
 def eval_reasoning(predictions: List[bool], references: List[bool], correct_pair_idx: List[set]):
-    if len(predictions) == 0 and len(references) == 0:
-        return 1.0
-    if len(predictions) == 0 or len(references) == 0:
-        return 0.0
     correct_num = 0.0
     for idx in correct_pair_idx:
         pair_idx, references_idx = idx
